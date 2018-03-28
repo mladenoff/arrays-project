@@ -19,7 +19,7 @@ describe StaticArray do
     end.to raise_error("index out of bounds")
   end
 
-  it "raises error when accessing pos past beginning" do
+  it "raises error when accessing pos before beginning" do
     arr = StaticArray.new(20)
     expect do
       arr[-1]
@@ -33,11 +33,19 @@ describe StaticArray do
     5.times { |i| expect(arr[i]).to eq(i) }
   end
 
-  it "raises error when setting outside range" do
+  it "raises error when setting past end" do
     arr = StaticArray.new(5)
 
     expect do
       arr[5]
+    end.to raise_error("index out of bounds")
+  end
+
+  it "raises error when setting before beginning" do
+    arr = StaticArray.new(5)
+
+    expect do
+      arr[-1]
     end.to raise_error("index out of bounds")
   end
 end
