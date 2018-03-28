@@ -16,14 +16,14 @@ describe StaticArray do
     arr = StaticArray.new(20)
     expect do
       arr[20]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("StaticArray: index out of bounds")
   end
 
   it "raises error when accessing pos before beginning" do
     arr = StaticArray.new(20)
     expect do
       arr[-1]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("StaticArray: index out of bounds")
   end
 
   it "sets items at an index" do
@@ -38,7 +38,7 @@ describe StaticArray do
 
     expect do
       arr[5]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("StaticArray: index out of bounds")
   end
 
   it "raises error when setting before beginning" do
@@ -46,6 +46,6 @@ describe StaticArray do
 
     expect do
       arr[-1]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("StaticArray: index out of bounds")
   end
 end

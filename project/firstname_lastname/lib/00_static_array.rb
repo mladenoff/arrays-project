@@ -32,6 +32,6 @@ class StaticArray
   attr_accessor :store
 
   def check_index(index)
-    raise "index out of bounds" if index >= length || index < 0
+    raise "StaticArray: index out of bounds" if index >= length || index < 0
   end
 end

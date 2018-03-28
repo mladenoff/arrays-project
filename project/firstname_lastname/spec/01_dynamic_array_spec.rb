@@ -25,7 +25,7 @@ describe DynamicArray do
 
     expect do
       arr[5]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("DynamicArray: index out of bounds")
   end
 
   it "raises error when accessing before beginning" do
@@ -34,7 +34,7 @@ describe DynamicArray do
 
     expect do
       arr[-1]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("DynamicArray: index out of bounds")
   end
 
   it "pops items" do
@@ -62,7 +62,7 @@ describe DynamicArray do
 
     expect do
       arr[5]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("DynamicArray: index out of bounds")
   end
 
   it "raises error when setting before beginning" do
@@ -72,7 +72,7 @@ describe DynamicArray do
 
     expect do
       arr[-1]
-    end.to raise_error("index out of bounds")
+    end.to raise_error("DynamicArray: index out of bounds")
   end
 
   it "unshifts items into array" do
@@ -98,11 +98,11 @@ describe DynamicArray do
 
     expect do
       arr.pop
-    end.to raise_error("index out of bounds")
+    end.to raise_error("DynamicArray: index out of bounds")
 
     expect do
       arr.shift
-    end.to raise_error("index out of bounds")
+    end.to raise_error("DynamicArray: index out of bounds")
   end
 
   it "doubles capacity when filled via pushes" do
