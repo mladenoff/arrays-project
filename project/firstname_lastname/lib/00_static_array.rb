@@ -1,4 +1,6 @@
-# This class just dumbs down a regular Array to be statically sized.
+# You must not use push or pop or shift or unshift for this class. Your
+# goal is to restrict a normal Array to a very restricted amount of
+# functionality.
 class StaticArray
   def initialize(length)
     @store = Array.new(length)
