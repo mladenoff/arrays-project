@@ -1,0 +1,43 @@
+require "00_static_array"
+
+describe StaticArray do
+  it "starts out with specified length" do
+    arr = StaticArray.new(10)
+    expect(arr.length).to eq(10)
+  end
+
+  it "allows you to get elements by index; all start nil" do
+    arr = StaticArray.new(10)
+
+    (0...10).each { |idx| expect(arr[idx]).to be_nil }
+  end
+
+  it "raises error when accessing pos past end" do
+    arr = StaticArray.new(20)
+    expect do
+      arr[20]
+    end.to raise_error("index out of bounds")
+  end
+
+  it "raises error when accessing pos past beginning" do
+    arr = StaticArray.new(20)
+    expect do
+      arr[-1]
+    end.to raise_error("index out of bounds")
+  end
+
+  it "sets items at an index" do
+    arr = StaticArray.new(5)
+
+    5.times { |i| arr[i] = i }
+    5.times { |i| expect(arr[i]).to eq(i) }
+  end
+
+  it "raises error when setting outside range" do
+    arr = StaticArray.new(5)
+
+    expect do
+      arr[5]
+    end.to raise_error("index out of bounds")
+  end
+end
