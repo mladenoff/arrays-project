@@ -8,6 +8,7 @@ describe DynamicArray do
 
   it "starts out with a backing StaticArray with capacity of 8" do
     arr = DynamicArray.new
+    expect(arr.send(:store)).to be_a(StaticArray)
     expect(arr.send(:capacity)).to eq(8)
   end
 

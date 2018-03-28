@@ -1,4 +1,4 @@
-require "ring_buffer"
+require "02_ring_buffer"
 
 describe RingBuffer do
   it "starts out empty" do

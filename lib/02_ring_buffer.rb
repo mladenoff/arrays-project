@@ -1,4 +1,4 @@
-require_relative "static_array"
+require_relative "00_static_array"
 
 class RingBuffer
   attr_reader :length
