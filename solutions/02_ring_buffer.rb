@@ -4,10 +4,12 @@ require_relative "00_static_array"
 # This will make life much easier.
 #
 # Please take note of the logical_idx_to_physical_idx method. You may
-# wish to use this from the beginning.
+# wish to use this from the beginning. Or you may wait until later.
 class RingBuffer
   attr_reader :length
 
+  # Check also the protected accessors for additional variables to
+  # initialize.
   def initialize(size)
     self.store = StaticArray.new(size)
     self.capacity = size
@@ -17,7 +19,7 @@ class RingBuffer
 
   # O(1)
   def push(val)
-    # Do not directly use self.store[].
+    # Do not directly use self.store[]. Prefer self[].
     check_can_insert!
 
     self.length += 1
@@ -33,7 +35,7 @@ class RingBuffer
 
   # O(1)
   def pop
-    # Do not directly use self.store[].
+    # Do not directly use self.store[]. Prefer self[].
     check_index!(0)
 
     val = self[self.length - 1]
@@ -50,7 +52,7 @@ class RingBuffer
 
   # O(1)
   def shift
-    # Do not directly use self.store[].
+    # Do not directly use self.store[]. Prefer self[].
     check_index!(0)
     val = self[0]
 
@@ -62,6 +64,7 @@ class RingBuffer
 
   # O(1)
   def unshift(val)
+    # Do not directly use self.store[]. Prefer self[].
     check_can_insert!
 
     self.start_idx = (self.start_idx - 1) % capacity
@@ -82,6 +85,8 @@ class RingBuffer
     raise "RingBuffer: index out of bounds" if index < 0 || length <= index
   end
 
+  # Translate a "logical" index given to you by a user into a
+  # position in the backing store.
   def logical_idx_to_physical_idx(logical_idx)
     (start_idx + logical_idx) % capacity
   end
