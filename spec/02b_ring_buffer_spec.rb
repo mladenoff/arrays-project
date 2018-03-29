@@ -1,17 +1,19 @@
 require "02_ring_buffer"
 
 describe RingBuffer do
-  it "has a logical_idx_to_physical_idx method" do
-    arr = RingBuffer.new(10)
-    5.times { |i| arr.push(i) }
+  describe "#logical_idx_to_physical_idx" do
+    it "computes phsyical indices with start_idx 0 " do
+      arr = RingBuffer.new(10)
+      5.times { |i| arr.push(i) }
 
-    (0...10).each do |logical_idx|
-      physical_idx = arr.send(:logical_idx_to_physical_idx, logical_idx)
-      expect(physical_idx).to eq(logical_idx)
+      (0...10).each do |logical_idx|
+        physical_idx = arr.send(:logical_idx_to_physical_idx, logical_idx)
+        expect(physical_idx).to eq(logical_idx)
+      end
     end
   end
 
-  describe "#shift" do
+  describe "#shift and #logical_idx_to_physical_idx" do
     it "shift returns first item" do
       arr = RingBuffer.new(10)
       5.times { |i| arr.push(i) }
@@ -83,7 +85,9 @@ describe RingBuffer do
         end
       end
     end
+  end
 
+  describe "#logical_idx_to_physical_idx and #[] and #[]=" do
     it "when start_idx != 0 #[] uses proper physical index" do
       arr = RingBuffer.new(10)
       10.times { |i| arr.push(i) }
@@ -111,7 +115,9 @@ describe RingBuffer do
         end
       end
     end
+  end
 
+  describe "#shifts and #pushes" do
     it "handles a series of shifts and pushes" do
       arr = RingBuffer.new(10)
       10.times { |i| arr.push(i) }
@@ -131,20 +137,22 @@ describe RingBuffer do
     end
   end
 
-  it "has an unshift method" do
-    arr = RingBuffer.new(10)
-    10.times { |i| arr.unshift(i) }
-    10.times { |i| expect(arr[i]).to eq(9 - i) }
+  describe "#unshift" do
+    it "has an unshift method" do
+      arr = RingBuffer.new(10)
+      10.times { |i| arr.unshift(i) }
+      10.times { |i| expect(arr[i]).to eq(9 - i) }
+    end
+
+    it "unshift when full raises exception" do
+      arr = RingBuffer.new(10)
+      10.times { |i| arr.unshift(i) }
+
+      expect do
+        arr.unshift(10)
+      end.to raise_error("ring buffer has no more space")
+    end
+
+    # TODO: finish last specs for unshift.
   end
-
-  it "unshift when full raises exception" do
-    arr = RingBuffer.new(10)
-    10.times { |i| arr.unshift(i) }
-
-    expect do
-      arr.unshift(10)
-    end.to raise_error("ring buffer has no more space")
-  end
-
-  # TODO: finish last specs for unshift.
 end
