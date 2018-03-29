@@ -1,5 +1,10 @@
 require_relative "00_static_array"
 
+# Important hint: only use self.store inside your #[] and #[]= methods.
+# This will make life much easier.
+#
+# Please take note of the logical_idx_to_physical_idx method. You may
+# wish to use this from the beginning.
 class RingBuffer
   attr_reader :length
 
