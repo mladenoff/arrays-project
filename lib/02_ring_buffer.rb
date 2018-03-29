@@ -62,6 +62,12 @@ class RingBuffer
 
   # O(1)
   def unshift(val)
+    check_can_insert!
+
+    self.start_idx = (self.start_idx - 1) % capacity
+    self.length += 1
+
+    self[0] = val
   end
 
   protected

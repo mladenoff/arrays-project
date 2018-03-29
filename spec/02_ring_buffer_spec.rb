@@ -231,5 +231,20 @@ describe RingBuffer do
     end
   end
 
-  # TODO: write specs for unshift.
+  it "has an unshift method" do
+    arr = RingBuffer.new(10)
+    10.times { |i| arr.unshift(i) }
+    10.times { |i| expect(arr[i]).to eq(9 - i) }
+  end
+
+  it "unshift when full raises exception" do
+    arr = RingBuffer.new(10)
+    10.times { |i| arr.unshift(i) }
+
+    expect do
+      arr.unshift(10)
+    end.to raise_error("ring buffer has no more space")
+  end
+
+  # TODO: finish last specs for unshift.
 end
