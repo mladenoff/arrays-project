@@ -144,6 +144,14 @@ describe RingBuffer do
       10.times { |i| expect(arr[i]).to eq(9 - i) }
     end
 
+    it "repeated unshifts increase length" do
+      arr = RingBuffer.new(10)
+      5.times do |i|
+        arr.unshift(i)
+        expect(arr.length).to eq(i + 1)
+      end
+    end
+
     it "unshift when full raises exception" do
       arr = RingBuffer.new(10)
       10.times { |i| arr.unshift(i) }
@@ -152,7 +160,45 @@ describe RingBuffer do
         arr.unshift(10)
       end.to raise_error("ring buffer has no more space")
     end
+  end
 
-    # TODO: finish last specs for unshift.
+  describe "#unshift and #logical_idx_to_physical_idx" do
+    it "unshift changes start_idx and physical_idxs" do
+      arr = RingBuffer.new(10)
+      arr.unshift(0)
+
+      expect(arr.send(:start_idx)).to eq(9)
+
+      (0...9).each do |logical_idx|
+        physical_idx = arr.send(:logical_idx_to_physical_idx, logical_idx)
+        expect(physical_idx).to eq((logical_idx - 1) % 10)
+      end
+    end
+
+    it "repeated unshifts work and change start_idx each time" do
+      arr = RingBuffer.new(10)
+      10.times do |i|
+        arr.unshift(i)
+        expect(arr.send(:start_idx)).to eq(9 - i)
+      end
+    end
+
+    it "repeated unshifts change logical index positions" do
+      arr = RingBuffer.new(10)
+      10.times do |i|
+        arr.unshift(i)
+
+        (0...10).each do |logical_idx|
+          physical_idx = arr.send(:logical_idx_to_physical_idx, logical_idx)
+          expected_physical_idx = (logical_idx - (i + 1)) % 10
+          expect(physical_idx).to eq(expected_physical_idx)
+
+          if logical_idx < i
+            expected_value = i - logical_idx
+            expect(arr[logical_idx]).to eq(expected_value)
+          end
+        end
+      end
+    end
   end
 end
