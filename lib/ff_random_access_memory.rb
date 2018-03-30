@@ -28,7 +28,7 @@ class RandomAccessMemory
 
   def load(ptr)
     if !@store.has_key?(ptr)
-      raise "0x#{ptr} was never allocated!"
+      raise "Address #{ptr} was never allocated!"
     end
 
     @store[ptr]
@@ -36,7 +36,7 @@ class RandomAccessMemory
 
   def store(ptr, val)
     if !@store.has_key?(ptr)
-      raise "0x#{ptr} was never allocated!"
+      raise "Address #{ptr} was never allocated!"
     end
 
     @store[ptr] = val
