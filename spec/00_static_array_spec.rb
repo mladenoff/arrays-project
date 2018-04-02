@@ -12,7 +12,12 @@ describe StaticArray do
     it "allows you to get elements by index; all start nil" do
       arr = StaticArray.new(10)
 
-      (0...10).each { |idx| expect(arr[idx]).to be_nil }
+      (0...10).each do |idx|
+        # Sneaky! directly accesses backing store which users of your
+        # StaticArray should not do!!
+        arr.send(:store)[idx] = idx
+      end
+      (0...10).each { |idx| expect(arr[idx]).to eq(idx) }
     end
 
     it "raises error when accessing pos past end" do
