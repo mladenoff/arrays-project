@@ -15,7 +15,7 @@ describe DynamicArray do
   end
 
   describe "#push and #[]" do
-    it "pushes items and allows you to get them using darr[]" do
+    it "pushes items and allows you to get them using #[]" do
       arr = DynamicArray.new
       5.times { |i| arr.push(i) }
 
@@ -69,7 +69,7 @@ describe DynamicArray do
       5.times { |i| arr.push(i) }
 
       expect do
-        arr[5]
+        arr[5] = 123
       end.to raise_error("DynamicArray: index out of bounds")
     end
 
@@ -79,7 +79,7 @@ describe DynamicArray do
       5.times { |i| arr.push(i) }
 
       expect do
-        arr[-1]
+        arr[-1] = 123
       end.to raise_error("DynamicArray: index out of bounds")
     end
   end
