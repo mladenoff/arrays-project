@@ -43,7 +43,7 @@ class StaticArray
   end
 
   protected
-  attr_accessor :store
+  attr_reader :store
 
   def check_index(index)
     raise "StaticArray: index out of bounds" if index >= length || index < 0

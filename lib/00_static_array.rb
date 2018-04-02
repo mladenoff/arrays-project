@@ -35,7 +35,7 @@ class StaticArray
   end
 
   protected
-  attr_accessor :store
+  attr_reader :store
 
   def check_index(index)
   end
