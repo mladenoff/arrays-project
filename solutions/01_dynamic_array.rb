@@ -102,6 +102,5 @@ class DynamicArray
     new_store = StaticArray.new(capacity * 2)
     (0...length).each { |idx| new_store[idx] = store[idx] }
     self.store = new_store
-    self.capacity *= 2
   end
 end
