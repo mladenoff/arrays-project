@@ -42,7 +42,7 @@ describe StaticArray do
       arr = StaticArray.new(5)
 
       expect do
-        arr[5]
+        arr[5] = 123
       end.to raise_error("StaticArray: index out of bounds")
     end
 
@@ -50,7 +50,7 @@ describe StaticArray do
       arr = StaticArray.new(5)
 
       expect do
-        arr[-1]
+        arr[-1] = 123
       end.to raise_error("StaticArray: index out of bounds")
     end
   end
