@@ -17,17 +17,24 @@
 # resizeable.
 class StaticArray
   def initialize(length)
+    @length = length
+    @store = []
   end
 
   # O(1)
   def [](index)
+    check_index index
+    @store[index]
   end
 
   # O(1)
   def []=(index, value)
+    check_index index
+    @store[index] = value
   end
 
   def length
+    @length
   end
 
   def inspect
@@ -38,5 +45,6 @@ class StaticArray
   attr_reader :store
 
   def check_index(index)
+    raise "StaticArray: index out of bounds" if index >= length || index < 0
   end
 end
